@@ -1,8 +1,8 @@
-# 从本地加载数据集
 import os
 import re
 import time
 import torch
+import sacrebleu
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence  # 作用: 序列填充 (Padding)
 from datasets import load_dataset  # 所属库: Hugging Face Datasets (datasets), 作用: 加载和管理数据集。
@@ -208,10 +208,10 @@ def collate_fn(batch, src_tokenizer, tgt_tokenizer, max_len=512):
 
 # 训练一个模型
 def train_epoch(model, dataloader, optimizer, scheduler, criterion, device, epoch, clip=1.0):
-#def train_epoch(model, dataloader, optimizer, criterion, device, epoch, clip=1.0):
     """训练一个epoch"""
     model.train()
     total_loss = 0
+    #accumulation = 10
     start_time = time.time()
     
     for batch_idx, (src, tgt) in enumerate(dataloader):
@@ -230,7 +230,8 @@ def train_epoch(model, dataloader, optimizer, scheduler, criterion, device, epoc
         output = model(src, tgt_input)
         
         # 计算损失
-        loss = criterion(output.reshape(-1, output.size(-1)), tgt_target.reshape(-1))        
+        loss = criterion(output.reshape(-1, output.size(-1)), tgt_target.reshape(-1))       
+        #accumulation_steps/accumulation_steps 
         # 反向传播
         loss.backward()
         '''
@@ -328,9 +329,8 @@ def translate(model, sentence, src_tokenizer, tgt_tokenizer, device, max_len=256
     return translation
 
 # ==========================================
-# 新增：BLEU 评估函数
+# BLEU 评估函数
 # ==========================================
-import sacrebleu
 def calculate_bleu(model, dataloader, device, src_tokenizer, tgt_tokenizer, max_len=50):
     """
     在验证集上计算 BLEU 分数

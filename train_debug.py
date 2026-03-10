@@ -1,8 +1,8 @@
-# 从本地加载数据集
 import os
 import re
 import time
 import torch
+import sacrebleu
 from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence  # 作用: 序列填充 (Padding)
 from datasets import load_dataset  # 所属库: Hugging Face Datasets (datasets), 作用: 加载和管理数据集。
@@ -316,7 +316,7 @@ def translate(model, sentence, src_tokenizer, tgt_tokenizer, device, max_len=256
     return translation
 
 # ==========================================
-# 新增：BLEU 评估函数
+# BLEU 评估函数
 # ==========================================
 import sacrebleu
 def calculate_bleu(model, dataloader, device, src_tokenizer, tgt_tokenizer, max_len=50):

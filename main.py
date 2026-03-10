@@ -45,19 +45,19 @@ def main():
 
     # --- 处理源语言分词器 (Source) ---
     if os.path.exists(SRC_PATH):
-        print(f"✅ 发现已存在的源语言分词器: {SRC_PATH}，正在加载...")
+        print(f"发现已存在的源语言分词器: {SRC_PATH}，正在加载...")
         src_tokenizer = Tokenizer.from_file(SRC_PATH)
     else:
-        print(f"⏳ 未找到源语言分词器，开始训练并保存到 {SRC_PATH} ...")
+        print(f"未找到源语言分词器，开始训练并保存到 {SRC_PATH} ...")
         # 调用你的训练函数
         src_tokenizer = train_tokenizer(train_dataset, VOCAB_SIZE, SRC_PATH)
 
     # --- 处理目标语言分词器 (Target) ---
     if os.path.exists(TGT_PATH):
-        print(f"✅ 发现已存在的目标语言分词器: {TGT_PATH}，正在加载...")
+        print(f"发现已存在的目标语言分词器: {TGT_PATH}，正在加载...")
         tgt_tokenizer = Tokenizer.from_file(TGT_PATH)
     else:
-        print(f"⏳ 未找到目标语言分词器，开始训练并保存到 {TGT_PATH} ...")
+        print(f"未找到目标语言分词器，开始训练并保存到 {TGT_PATH} ...")
         # 调用你的训练函数
         tgt_tokenizer = train_tokenizer(train_dataset, VOCAB_SIZE, TGT_PATH)
 
@@ -101,18 +101,10 @@ def main():
     def lr_lambda(step, d_model=512, warmup_steps=4000):
         if step == 0:
             return 1e-7
-        
-        #if step < 5: 
-        #    print(f"DEBUG: step={step}, warmup_used={warmup_steps}, d_model={d_model}")
-
         scale_factor = d_model ** -0.5
-        #compensation = warmup_steps ** 0.5
-
         return scale_factor*min(step ** -0.5, step * warmup_steps ** -1.5)
     
     scheduler = optim.lr_scheduler.LambdaLR(optimizer, lr_lambda)
-    
-    #optimizer = optim.Adam(model.parameters(), lr=0.0001, betas=(0.9, 0.98), eps=1e-9)
     
     # 忽略padding的损失
     criterion = nn.CrossEntropyLoss(ignore_index=0, label_smoothing=0.1)
@@ -130,7 +122,6 @@ def main():
        
         # 训练
         train_loss = train_epoch(model, train_loader, optimizer,scheduler, criterion, device, epoch)
-        #train_loss = train_epoch(model, train_loader, optimizer, criterion, device, epoch)
         train_losses.append(train_loss)
         
         # 验证
