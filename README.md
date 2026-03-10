@@ -5,7 +5,7 @@
 
 **注**：由于本项目主要用于学习和演示 Transformer 架构的实现细节。目前的翻译效果尚未达到标准，具体原因见下方“实验分析”部分。
 
-## 🛠️ 环境配置 (Requirements)
+## 环境配置 (Requirements)
 在运行代码前，请确保安装了以下依赖库：
 ```bash
 pip install -r requirements.txt
@@ -41,21 +41,22 @@ pip install -r requirements.txt
 
 ## 实验分析((Analysis)
 目前模型的翻译质量未达到预期,经过分析(根据对 `train_debug.py` 和 `main_debug.py` 的调试分析，发现模型在少量数据或单句测试中能够准确翻译，这证明模型的核心代码逻辑（Attention 机制、前向传播等）是正确的，说明模型本身没有问题），可能原因如下：
-1.数据量不足 (Data Scarcity)
+1. 数据量不足 (Data Scarcity)
 IWSLT 2014 数据集大约有 170k 句对，对于参数量巨大的 Transformer 模型来说，数据量可能不够，导致模型过拟合，无法泛化到未见过的句子。
-2.模型容量过大 (Model Capacity)
+2. 模型容量过大 (Model Capacity)
 使用了标准的 Base 配置（6层，512维度）。在小数据集上，如此大的模型容易记住训练数据而不是学习语言规律。
 可以尝试减小 d_model (如降至 128 或 256) 或减少层数 (num_layers=3)。
-3.超参数设置不当 (Hyperparameters)
+3. 超参数设置不当 (Hyperparameters)
 学习率策略：  虽然代码中实现了原论文推荐的 Noam Scheduler (Warmup + Decay) 策略，但该策略的默认超参数（特别是 `warmup_steps`）可能不适合**IWSLT 2014**数据集，原有的 Warmup 时长可能过长，导致模型在宝贵的训练步数中花费太多时间在“热身”上，或者峰值学习率不适合当前数据分布，从而造成收敛困难或陷入局部最优。
-4.训练时长 (Training Duration)
+4. 训练时长 (Training Duration)
 受限于计算资源，训练的 Epoch 数量可能不足，模型尚未充分学习。
 
 ## 未来改进计划 (Future Work)
-1.尝试更小的模型架构以适应小数据集。
-2.更改学习率策略
-3.增加数据增强或混合更大规模的数据集。
-4.添加 Beam Search 解码策略以提升生成质量。
+1. 尝试更小的模型架构以适应小数据集。
+2. 更改学习率策略
+3. 增加数据增强或混合更大规模的数据集。
+4. 添加 Beam Search 解码策略以提升生成质量。
+
 ## 文件结构 (File Structcture)
 .
 ├── iws lt14/              # 数据缓存目录
