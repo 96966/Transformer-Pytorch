@@ -74,14 +74,3 @@ pip install -r requirements.txt
 ├── tgt_tokenizer.json     # 目标语言 (德语) 分词器配置
 ├── training_log.txt       # 训练日志
 └── requirements.txt       # 依赖库列表
-
-
-
-
-
-
-
-
-
-
-
