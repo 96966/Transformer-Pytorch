@@ -31,6 +31,19 @@ pip install -r requirements.txt
 训练过程已保存为 training_log.txt (可直接点击查看)。
 
 2. 翻译示例 (Translation Examples)
+
+以下是模型在当前状态下的部分推理结果：
+
+| 源语言 (English) | 目标语言 (German - Predicted) |
+| :--- | :--- |
+| Hello, how are you? | Hallo , wie geht es Ihnen ? |
+| I love machine learning. | Ich liebe Spielen . |
+| The weather is nice today. | Die Größe ist hier . |
+
+> **注**：可以看到模型能够学习到基本的语序和部分词汇对应关系...
+
+
+3. 翻译示例 (Translation Examples)
 以下是模型在当前状态下的部分推理结果：
 | 源语言 (English) | 目标语言 (German - Predicted) |
 | :--- | :--- |
@@ -46,7 +59,7 @@ pip install -r requirements.txt
 2. 模型容量过大 (Model Capacity)
 --  在训练中使用了标准的 Base 配置（6层，512维度）。可以尝试减小 d_model (如降至 128 或 256) 或减少层数 (num_layers=3)。
 3. 超参数设置不当 (Hyperparameters)
--- 虽然代码中实现了原论文推荐的 Noam Scheduler (Warmup + Decay) 策略，但该策略的默认超参数（特别是 `warmup_steps`）可能不适合**IWSLT 2014**数据集，原有的 Warmup 时长可能过长，导致模型在宝贵的训练步数中花费太多时间在“热身”上，或者峰值学习率不适合当前数据分布，从而造成收敛困难或陷入局部最优。
+-- 虽然代码实现了原论文推荐的 Noam Scheduler (Warmup + Decay) 策略，但该策略的默认超参数（特别是 `warmup_steps`）可能不适合**IWSLT 2014**数据集，原有的 Warmup 时长可能过长，导致模型在宝贵的训练步数中花费太多时间在“热身”上，或者峰值学习率不适合当前数据分布，从而造成收敛困难或陷入局部最优。
 4. 训练时长 (Training Duration)
 --受限于计算资源，训练的 Epoch 数量可能不足，模型尚未充分学习。
 
