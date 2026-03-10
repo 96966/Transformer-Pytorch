@@ -42,18 +42,6 @@ pip install -r requirements.txt
 
 > **注**：可以看到模型能够学习到基本的语序和部分词汇对应关系，但在语义准确性和长句处理上仍有较大提升空间。
 
-
-3. 翻译示例 (Translation Examples)
-    
-以下是模型在当前状态下的部分推理结果：
-
-| 源语言 (English) | 目标语言 (German - Predicted) |
-| :--- | :--- |
-| Hello, how are you? | Hallo , wie geht es Ihnen ? |
-| I love machine learning. | Ich liebe Spielen . |
-| The weather is nice today. | Die Größe ist hier . |
-
-
 ## 实验分析((Analysis)
 目前模型的翻译质量未达到预期,经过分析(根据对 `train_debug.py` 和 `main_debug.py` 的调试分析，发现模型在少量数据或单句测试中能够准确翻译，这证明模型的核心代码逻辑（Attention 机制、前向传播等）是正确的，说明模型本身没有问题），可能原因如下：
 1. 数据量不足 (Data Scarcity)
