@@ -10,6 +10,22 @@
 ```bash
 pip install -r requirements.txt
 
+⚙️ 实验配置
+当前的实验配置如下（可以在 main.py 和 model.py 中调整）：
+| 参数 | 设定值 | 说明 |
+| :--- | :--- | :--- |
+| 模型架构 | Transformer (Base) | 包含 Encoder 和 Decoder |
+| 网络层数 (Layers) | 6 | Encoder/Decoder 堆叠层数 |
+| 隐藏层维度 (d_model) | 512 | 词向量维度 |
+| 注意力头数 (Heads) | 8 | Multi-head Attention 的头数 |
+| 前馈网络维度 (d_ff) | 2048 | Feed Forward 中间层维度 |
+| 最大序列长度 | 256 | 最大 Token 数 |
+| 学习率策略 | Noam Scheduler | 采用原论文 Warmup + Decay 策略 |
+| 优化器 (Optimizer) | Adam | 优化器 |
+| 批次大小 (Batch Size) | 128 | 批次大小 |
+
+
+
 ## 当前的实验配置如下（可以在 main.py 和 model.py 中调整）：
 | 参数 | 设定值 | 说明 |
 | :--- | :--- | :--- |
