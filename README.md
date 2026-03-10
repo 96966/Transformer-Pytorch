@@ -60,6 +60,8 @@ pip install -r requirements.txt
 4. 添加 Beam Search 解码策略以提升生成质量。
 
 ## 文件结构 (File Structcture)
+
+```text
 .
 ├── iws lt14/              # 数据缓存目录
 ├── __pycache__/           # Python 字节码
