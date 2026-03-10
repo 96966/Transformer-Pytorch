@@ -44,7 +44,9 @@ pip install -r requirements.txt
 
 
 3. 翻译示例 (Translation Examples)
+    
 以下是模型在当前状态下的部分推理结果：
+
 | 源语言 (English) | 目标语言 (German - Predicted) |
 | :--- | :--- |
 | Hello, how are you? | Hallo , wie geht es Ihnen ? |
