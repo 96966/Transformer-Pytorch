@@ -9,8 +9,8 @@
 在运行代码前，请确保安装了以下依赖库：
 ```bash
 pip install -r requirements.txt
-##  当前的实验配置如下（可以在 main.py 和 model.py 中调整）：
 
+## 当前的实验配置如下（可以在 main.py 和 model.py 中调整）：
 | 参数 | 设定值 | 说明 |
 | :--- | :--- | :--- |
 | 模型架构 | Transformer (Base) | 包含 Encoder 和 Decoder |
