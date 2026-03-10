@@ -9,8 +9,7 @@
 在运行代码前，请确保安装了以下依赖库：
 ```bash
 pip install -r requirements.txt
-
-## 当前的实验配置如下（可以在 main.py 和 model.py 中调整）：
+##  当前的实验配置如下（可以在 main.py 和 model.py 中调整）：
 
 | 参数 | 设定值 | 说明 |
 | :--- | :--- | :--- |
@@ -54,8 +53,7 @@ IWSLT 2014 数据集大约有 170k 句对，对于参数量巨大的 Transformer
 2.更改学习率策略
 3.增加数据增强或混合更大规模的数据集。
 4.添加 Beam Search 解码策略以提升生成质量。
-
- ## 文件结构 (File Structcture)
+## 文件结构 (File Structcture)
 .
 ├── iws lt14/              # 数据缓存目录
 ├── __pycache__/           # Python 字节码
@@ -68,6 +66,8 @@ IWSLT 2014 数据集大约有 170k 句对，对于参数量巨大的 Transformer
 ├── tgt_tokenizer.json     # 目标语言 (德语) 分词器配置
 ├── training_log.txt       # 训练日志
 └── requirements.txt       # 依赖库列表
+
+
 
 
 
